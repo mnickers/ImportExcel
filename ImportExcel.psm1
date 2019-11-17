@@ -463,14 +463,22 @@ function Import-Excel {
                             }
                             else { $NewRow[$P.Value] = $Worksheet.Cells[$R, $P.Column].Value }
                         }
+                        [PSCustomObject]$NewRow
                     }
                     else {
                         foreach ($P in $PropertyNames) {
                             $NewRow[$P.Value] = $Worksheet.Cells[$R, $P.Column].Value
                             #    Write-Verbose "Import cell '$($Worksheet.Cells[$R, $P.Column].Address)' with property name '$($p.Value)' and value '$($Worksheet.Cells[$R, $P.Column].Value)'."
                         }
+
+                        $targetMethod = {
+                            "Row: $($R)"
+                        }
+
+                        Write-Verbose (&$targetMethod)
+
+                        [PSCustomObject]$NewRow | Add-Member -PassThru -MemberType ScriptMethod -Name UpdateRecord -Value $targetMethod
                     }
-                    [PSCustomObject]$NewRow
                 }
                 #endregion
             }
