@@ -25,4 +25,4 @@
     $r | Sort-Object Date, symbol | Export-Excel $xl -PivotTableDefinition $ptd -AutoSize -AutoFilter -Show
 }
 
-# Export-StocksToExcel -symbols 'ibm,aapl,msft' -measure High
+Export-StocksToExcel -symbols 'ibm,aapl,msft' -measure High

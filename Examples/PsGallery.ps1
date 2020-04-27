@@ -15,7 +15,7 @@ $top1000 = foreach ($p in 1..50) {
     }
 }
 
-del "~\Documents\gallery.xlsx"
+#del "~\Documents\gallery.xlsx"
 $pivotdef = New-PivotTableDefinition -PivotTableName 'Summary' -PivotRows by -PivotData @{name="Count"
                                      Downloads="Sum"} -PivotDataToColumn -Activate -ChartType ColumnClustered -PivotNumberFormat '#,###'
 $top1000 | export-excel -path '~\Documents\gallery.xlsx' -Numberformat '#,###' -PivotTableDefinition $pivotdef -TableName 'TopDownloads' -Show
